@@ -134,7 +134,7 @@ public class ProductService {
             Path path = this.rootLocation.resolve(file.getImageUrl()).normalize().toAbsolutePath();
             Files.deleteIfExists(path);
         }
-        
+
         productRepository.delete(product);
     }
 }
