@@ -1,0 +1,5 @@
+package com.example.domain;
+
+public enum OrderStatus {
+    CREATED, DELIVERING, DELIVERED, CANCELLED, PAID, WAITING_FOR_PICKING, PICKING, PICKED, PROCESSING, NEW;
+}
