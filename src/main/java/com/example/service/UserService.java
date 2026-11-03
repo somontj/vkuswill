@@ -23,14 +23,14 @@ public class UserService {
     }
 
     public User getUser(LoginDto loginDto) {
-        // 1. Ищем пользователя
+        
         User user = userRepository.findUserByEmail(loginDto.getEmail());
-        // 2. Всегда выполняем проверку (даже со "пустым" паролем), чтобы защититься от тайминг-атак
+        
         String encodedPassword = (user != null) ? user.getPassword() : "NOT_FOUND_DUMMY_HASH";
 
         boolean isPasswordMatch = authUtils.matchPassword(loginDto.getPassword(), encodedPassword);
 
-        // 3. Если пользователя нет ИЛИ пароль не подошел — выбрасываем ОДНО общее исключение
+        
         if (user == null || !isPasswordMatch) {
             throw new BadCredentialsException("Неверный email или пароль");
         }
@@ -44,7 +44,7 @@ public class UserService {
         return userRepository.findAll()
                 .stream()
                 .map(UserDto::new)
-//                .map(user -> new UserDto(user))
+
                 .toList();
     }
 

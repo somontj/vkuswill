@@ -29,9 +29,9 @@ public class PickerController {
         try {
             if (dto.getBirthDate() != null) {
                 int age = Period.between(dto.getBirthDate(), LocalDate.now()).getYears();
-//                items.stream()
-//                        .filter(item -> ChronoUnit.DAYS.between(LocalDate.now(), item.getExpirationDate()) <= 3)
-//                        .forEach(item -> item.setPrice(item.getPrice().divide(BigDecimal.valueOf(2))));
+
+
+
                 if (age < 18) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                             .body("Регистрация отклонена: сотруднику должно быть не менее 18 лет!");

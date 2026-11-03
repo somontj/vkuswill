@@ -18,8 +18,8 @@ public class CartItem {
     private Product product;
 
     @Column(name = "quantity_item", nullable = false)
-    @NotNull(message = "Количество товара должно быть указано") // Заменили @NotBlank на @NotNull
-    @Min(value = 1, message = "Количество товара в корзине должно быть не менее 1") // Корректнее ставить минимум 1, иначе зачем пустой товар в корзине?
+    @NotNull(message = "Количество товара должно быть указано") 
+    @Min(value = 1, message = "Количество товара в корзине должно быть не менее 1") 
     private Integer quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)

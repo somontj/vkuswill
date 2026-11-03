@@ -26,13 +26,13 @@ public class ProductService {
     private final String uploadDirProperty;
     private Path rootLocation;
 
-    // 1. Внедряем значение из application.properties через конструктор
+    
     public ProductService(ProductRepository productRepository, @Value("${app.upload.dir}") String uploadDirProperty) {
         this.productRepository = productRepository;
         this.uploadDirProperty = uploadDirProperty;
     }
 
-    // 2. Инициализируем относительный путь при старте приложения
+    
     @PostConstruct
     public void init() {
         try {
@@ -115,7 +115,7 @@ public class ProductService {
             if (productWithSameName != null) {
                 throw new IllegalArgumentException("Название обновляемого товара " + databaseProduct.getName() + " занято под другим товаром!");
             }
-//            databaseProduct.setName(product.getName().trim().replaceAll("\\s+", " "));
+
         }
 
         databaseProduct.setDescription(productDto.getDescription());
@@ -134,98 +134,7 @@ public class ProductService {
             Path path = this.rootLocation.resolve(file.getImageUrl()).normalize().toAbsolutePath();
             Files.deleteIfExists(path);
         }
-
-//        for (int i = 0; i < product.getImageProducts().size(); i ++) {
-//            ImageProduct file = product.getImageProducts().get(i);
-//            String url = file.getImageUrl();
-//
-//            Path path =  Paths.get(UPLOAD_DIR, file.getImageUrl());
-//            Files.deleteIfExists(path);
-//        }
-
-//        for (ImageProduct imageProduct : product.getImageProducts()) {
-//            Path path = Paths.get(UPLOAD_DIR, imageProduct.getImageUrl());
-//            Files.deleteIfExists(path);
-//        }
-
+        
         productRepository.delete(product);
     }
 }
-
-
-//package com.example.service;
-//
-//import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.stereotype.Service;
-//import org.springframework.web.multipart.MultipartFile;
-//import jakarta.annotation.PostConstruct;
-//import java.io.IOException;
-//import java.nio.file.*;
-//        import java.util.UUID;
-//
-//@Service
-//public class ProductService {
-//
-//    // Spring сам вставит сюда значение "uploads" из application.properties
-//    @Value("${app.upload.dir}")
-//    private String uploadDirProperty;
-//
-//    private Path rootLocation;
-//
-//    // Метод выполнится автоматически СРАЗУ после старта приложения
-//    @PostConstruct
-//    public void init() {
-//        try {
-//            // Создаем объект Path. Он автоматически поймет, что папка находится в корне проекта
-//            this.rootLocation = Paths.get(uploadDirProperty);
-//
-//            // Если папки "uploads" еще нет, Spring сам создаст ее при старте
-//            if (!Files.exists(rootLocation)) {
-//                Files.createDirectories(rootLocation);
-//            }
-//        } catch (IOException e) {
-//            throw new RuntimeException("Не удалось инициализировать папку для загрузки файлов", e);
-//        }
-//    }
-//
-//    // Ваш метод сохранения файла теперь будет выглядеть очень чисто:
-//    public String saveImage(MultipartFile file) {
-//        if (file.isEmpty()) {
-//            throw new IllegalArgumentException("Файл пустой");
-//        }
-//
-//        try {
-//            // Генерируем уникальное имя, чтобы файлы не перезаписывали друг друга
-//            String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-//
-//            // Безопасно разрешаем путь внутри нашей целевой папки
-//            Path destinationFile = this.rootLocation.resolve(Paths.get(filename))
-//                    .normalize().toAbsolutePath();
-//
-//            // Проверка безопасности: не пытается ли файл выйти за пределы нашей папки (Path Traversal атака)
-//            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-//                throw new IllegalArgumentException("Попытка загрузить файл за пределы разрешенной директории");
-//            }
-//
-//            // Копируем файл в файловую систему
-//            Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
-//
-//            // Возвращаем только имя файла (или относительный путь), который запишем в БД
-//            return filename;
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException("Ошибка при сохранении файла", e);
-//        }
-//    }
-//
-//    // Ваш метод удаления файла тоже использует rootLocation:
-//    public void deleteImageFile(String filename) {
-//        try {
-//            Path file = this.rootLocation.resolve(filename);
-//            Files.deleteIfExists(file);
-//        } catch (IOException e) {
-//            throw new RuntimeException("Не удалось удалить файл: " + filename, e);
-//        }
-//    }
-//}
-

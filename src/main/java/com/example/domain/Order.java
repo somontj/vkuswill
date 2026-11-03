@@ -17,7 +17,7 @@ public class Order {
 
     @Column(name = "number_order", nullable = false, unique = true)
     private String numberOrder = UUID.randomUUID().toString();
-//    .replaceAll("[^0-9]", "").substring(0, 8);
+
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -29,8 +29,8 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-//    @Column(name = "user_name")
-//    private String userName;
+
+
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new ArrayList<>();
@@ -75,7 +75,7 @@ public class Order {
         this.createdAt = LocalDateTime.now();
 
         if (this.numberOrder == null) {
-            // Генерирует случайное число от 10000000 до 99999999
+            
             long randomNumber = java.util.concurrent.ThreadLocalRandom.current()
                     .nextLong(10_000_000L, 100_000_000L);
             this.numberOrder = String.valueOf(randomNumber);

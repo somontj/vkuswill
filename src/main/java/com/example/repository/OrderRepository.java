@@ -13,18 +13,18 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-//    // Явно указываем выборку элементов заказа (i) через JOIN
-//    @Query("SELECT i FROM Order o JOIN o.orderItems i WHERE o.userId = :id")
-//    List<OrderItem> getOrderItemsByUserId(@Param("id") Long id);
 
-    @Query("SELECT o FROM Order o") // Напишите здесь ваш JPQL или SQL запрос
+
+
+
+    @Query("SELECT o FROM Order o") 
     List<Order> getOrder();
 
 
-    // Получить все заказы конкретного пользователя
+    
     List<Order> findByUser_Id(Long userId);
 
-    // Пример FETCH-запроса, если захотите вытащить заказ сразу со всеми его элементами
+    
     @Query("SELECT o FROM Order o JOIN FETCH o.orderItems WHERE o.id = :orderId")
     Optional<Order> findOrderWithItems(@Param("orderId") Long orderId);
 }

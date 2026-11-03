@@ -20,10 +20,10 @@ public class Picker {
     private LocalDate birthDate;
 
     @Column(unique = true)
-    private String badgeBarcode; // Штрихкод на бейдже (например, "PICKER-10023")
+    private String badgeBarcode; 
 
     @Enumerated(EnumType.STRING)
-    private PickerStatus status; // FREE, BUSY, OFF, PICKING
+    private PickerStatus status; 
 
     public Picker() {
 

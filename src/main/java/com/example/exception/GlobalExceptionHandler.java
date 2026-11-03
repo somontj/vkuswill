@@ -11,21 +11,21 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // Перехватываем вашу ошибку неверного логина/пароля
+    
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Object> handleBadCredentials(BadCredentialsException ex) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.UNAUTHORIZED.value()); // Код ответа 401
+        body.put("status", HttpStatus.UNAUTHORIZED.value()); 
         body.put("error", "Unauthorized");
-        body.put("message", ex.getMessage()); // Сюда придет текст "Неверный email или пароль"
+        body.put("message", ex.getMessage()); 
 
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> handleUserNotFound(UserNotFoundException ex) {
-        // Возвращаем статус 404 и текст ошибки в теле ответа
+        
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .body(ex.getMessage());

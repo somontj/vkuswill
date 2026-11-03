@@ -36,7 +36,7 @@ public class User {
     @Column(name = "password")
     @NotBlank(message = "Пароль недоложен быть пустым")
     @Size(min = 3, message = "Пароль должен быть не менее 3 символов")
-//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)    Как дто. Как это работает: Spring будет принимать пароль при регистрации, но полностью исключит его из JSON при GET-запросах.
+
     private String password;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

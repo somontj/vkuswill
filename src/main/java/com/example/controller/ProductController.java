@@ -40,10 +40,10 @@ public class ProductController {
         } catch (IllegalArgumentException exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
         } catch (Exception exception) {
-            // 1. Обязательно выводим в консоль, чтобы увидеть стектрейс!
+            
             exception.printStackTrace();
 
-            // 2. Временно отдаем реальный текст ошибки в Postman для диагностики
+            
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Ошибка: " + exception.getMessage());
         }

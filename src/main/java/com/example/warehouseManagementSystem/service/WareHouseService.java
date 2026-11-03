@@ -63,7 +63,7 @@ public class WareHouseService {
                 ))
                 .toList();
 
-//        pickingListRepository.save(pickingList); @Transactional позаботится сам
+
         return new PickerListDto(
                 order.getUser().getName(),
                 order.getUser().getPhone(),

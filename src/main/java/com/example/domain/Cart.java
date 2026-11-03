@@ -35,8 +35,8 @@ public class Cart {
     }
 
     public void addItem(CartItem item) {
-        this.items.add(item); // 1. Добавляем элемент в наш список List<CartItem> внутри корзины
-        item.setCart(this);   // 2. Связываем сам элемент с текущей корзиной (проставляем back-reference)         // КРИТИЧЕСКИ ВАЖНАЯ СТРОКА для двунаправленной связи!
+        this.items.add(item); 
+        item.setCart(this);   
     }
 
     public Long getId() {

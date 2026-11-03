@@ -35,16 +35,16 @@ public class Product {
     @Positive(message = "Цена должна быть больше нуля")
     private BigDecimal price;
 
-    @Column(name = "stock_quantity") // Хорошая практика: явно указывать snake_case для БД
+    @Column(name = "stock_quantity") 
     @NotNull(message = "Количество на складе не должно быть пустым")
-    @Min(value = 0, message = "Количество товара на складе не может быть меньше 0") // Защита от отрицательного склада
+    @Min(value = 0, message = "Количество товара на складе не может быть меньше 0") 
     private Integer stockQuantity;
 
-    @Column(name = "created_at", updatable = false)  // Никогда не меняется, дата добавление товара
+    @Column(name = "created_at", updatable = false)  
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")          // Обновляется при каждом изменении
-    private LocalDateTime updatedAt;     // дата добавление товара
+    @Column(name = "updated_at")          
+    private LocalDateTime updatedAt;     
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ImageProduct> imageProducts = new ArrayList<>();

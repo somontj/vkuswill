@@ -9,9 +9,9 @@ public class ImageProductDto {
     @Size(max = 512, message = "Ссылка слишком длинная")
     private String imageUrl;
 
-    private boolean isMain = false;// главная ли фотография
+    private boolean isMain = false;
 
-    // Конструкторы, Геттеры и Сеттеры
+    
     public ImageProductDto() {
     }
 

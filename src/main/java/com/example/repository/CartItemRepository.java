@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
 
-    // Этот метод работает нормально, если он вам нужен:
+    
     List<CartItem> findCartItemByCart(Cart cart);
 
-    // Этот аннотированный метод сработает, потому что указывает точный путь через корзину к пользователю:
+    
     @Query("SELECT ci FROM CartItem ci " +
             "JOIN FETCH ci.product " +
             "WHERE ci.cart.user.id = :userId")

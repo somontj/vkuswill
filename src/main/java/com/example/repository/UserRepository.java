@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     User findUserByEmail(String email);
-    //    @Query("SELECT new com.example.dto.UserDto(u.name, u.surname) FROM User u WHERE u.id = :id")
-    //    UserDto findUserById(@Param("id") Long id);
+    
+    
     UserDto findUserById(Long id);
 
 

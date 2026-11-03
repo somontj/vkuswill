@@ -34,7 +34,7 @@ public class CartController {
 
 
     @PostMapping("/addItem")
-    // ДОБАВИЛИ @RequestBody, чтобы Spring читал JSON из Postman
+    
     public ResponseEntity<String> addItem(HttpSession session, @RequestBody CartItemDto cartItemDto) {
         try {
             User user = (User) session.getAttribute("currentUser");
@@ -48,7 +48,7 @@ public class CartController {
             return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
         }
         catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); // Для "Товар не найден" лучше 404 (NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); 
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка на стороне сервера: " + exception.getMessage());
         }
@@ -56,7 +56,7 @@ public class CartController {
 
 
     @PostMapping("/addItems")
-    // ДОБАВИЛИ @RequestBody, чтобы Spring читал JSON из Postman
+    
     public ResponseEntity<String> addItems(HttpSession session, @RequestBody List<CartItemDto> cartItemDtos) {
         try {
             User user = (User) session.getAttribute("currentUser");
@@ -70,7 +70,7 @@ public class CartController {
             return ResponseEntity.status(exception.getStatusCode()).body(exception.getMessage());
         }
         catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); // Для "Товар не найден" лучше 404 (NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); 
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка на стороне сервера: " + exception.getMessage());
         }
@@ -87,10 +87,10 @@ public class CartController {
             cartService.changeProductQuantityInUserCart(cartItemDto, user.getId());
             return ResponseEntity.ok("Количество товара в корзине успешно изменено");
         } catch (ResponseStatusException exception) {
-            // Перехватываем нашу 401 ошибку и возвращаем её статус и текст (без "Ошибка сервера")
+            
             return ResponseEntity.status(exception.getStatusCode()).body(exception.getReason());
         } catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); // Для "Товар не найден" лучше 404 (NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); 
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка на стороне сервера: " + exception.getMessage());
         }
@@ -107,10 +107,10 @@ public class CartController {
             cartService.deleteItemFromUserCart(id, user.getId());
             return ResponseEntity.ok("Удаляемый товар в корзине успешно удален");
         } catch (ResponseStatusException exception) {
-            // Перехватываем нашу 401 ошибку и возвращаем её статус и текст (без "Ошибка сервера")
+            
             return ResponseEntity.status(exception.getStatusCode()).body(exception.getReason());
         } catch (IllegalArgumentException exception) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); // Для "Товар не найден" лучше 404 (NOT_FOUND)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage()); 
         } catch (Exception exception) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка на стороне сервера: " + exception.getMessage());
         }

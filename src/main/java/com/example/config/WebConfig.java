@@ -16,7 +16,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String absolutePath = Paths.get(uploadDir).toAbsolutePath().toUri().toString();
         
-        // Мапим URL /uploads/** на физическую папку в корне проекта
+        
         registry.addResourceHandler("/upload/**")
                 .addResourceLocations(absolutePath);
     }
