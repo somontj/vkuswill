@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 
 @SpringBootApplication
-public class MedicalBookingApplication {
+public class VkusWillDeliveryApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MedicalBookingApplication.class, args);
+        SpringApplication.run(VkusWillDeliveryApplication.class, args);
     }
 }
 
